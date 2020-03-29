@@ -1,7 +1,9 @@
 buildscript {
+    // ext 전역변수 지정
     ext {
         springBootVersion = '2.1.7.RELEASE'
     }
+    // maven 저장소도 많이 사용하지만 최근에 jcenter로 많이 이동중
     repositories {
         mavenCentral()
         jcenter()
@@ -11,6 +13,7 @@ buildscript {
     }
 }
 
+// 필수 플러그인 이라고 생각하면 된다
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
