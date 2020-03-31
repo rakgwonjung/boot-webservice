@@ -1,5 +1,6 @@
 package com.jrock.boot.springboot.domain.posts;
 
+import com.jrock.boot.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,8 @@ import javax.persistence.*;
 // JPA 어노테이션 모델 선언
 // DB의 테이블과 매칭될 클래스 ( Entity 클래스 )
 @Entity
-public class Posts {
+// BaseTimeEntity 상위 JPA 클래스(컬럼까지 상속한다)
+public class Posts extends BaseTimeEntity {
 
     // PK
     @Id
