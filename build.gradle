@@ -34,5 +34,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    // 소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현시 필요한 의존성
+    // spring-security-oauth2-client와 spring-security-oauth2-jose를 기본으로 관리해 준다
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    // 스프링-세션-데이터베이스 의존성 ( 세션저장소 jdbc )
+    compile('org.springframework.session:spring-session-jdbc')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
