@@ -2,12 +2,16 @@ package com.jrock.boot.springboot.service.posts;
 
 import com.jrock.boot.springboot.domain.posts.Posts;
 import com.jrock.boot.springboot.domain.posts.PostsRepository;
+import com.jrock.boot.springboot.web.dto.PostListResponseDto;
 import com.jrock.boot.springboot.web.dto.PostsResponseDto;
 import com.jrock.boot.springboot.web.dto.PostsSaveRequestDto;
 import com.jrock.boot.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 // 스프링 Bean 주입 방식에는 @Autowired, setter, 생성자가 있다.
 // 이 때 생성자가 가장 권장한다
@@ -45,5 +49,20 @@ public class PostsService {
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
 
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete (Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id= "+ id));
+
+        postsRepository.delete(posts);
     }
 }
