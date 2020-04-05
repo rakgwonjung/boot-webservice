@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 // JPA Auditing 활성화
-@EnableJpaAuditing
+// HELLO TEST 떄문에 임시 주석 JPA 인식 못함, config 패키지에 JpaConfig 추가
+//@EnableJpaAuditing
 // 스프링부트 자동설정, Bean 읽기 생성 자동설정, 특히 이 위치부터 읽기 시작한다, 항상 프로젝트 상단 배치
 @SpringBootApplication
 // 메인클래스

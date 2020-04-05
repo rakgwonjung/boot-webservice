@@ -1,10 +1,14 @@
 package com.jrock.boot.springboot;
 
+import com.jrock.boot.springboot.config.auth.SecurityConfig;
 import com.jrock.boot.springboot.web.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,13 +24,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // @Service, @Component, @Repository 등은 사용 불가
 // 컨트롤러만 사용하기 때문에 이 것 사용 @WebMvcTest
 // JPA 에서는 작동하지 않는다.
-@WebMvcTest(controllers = HelloController.class)
+// 이 것은 CustomOAuth2UserService를 스캔하지 않는다
+// 언제 삭제 될지 모르니 비 추천
+@WebMvcTest(controllers = HelloController.class, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+        })
 public class HelloControllerTest {
 
     @Autowired
     // Web MVC 테스트 시작 점
     private MockMvc mvc;
 
+    @WithMockUser(roles = "USER")
     @Test
     public void hello_리턴() throws Exception {
         String hello = "hello";
@@ -44,6 +53,7 @@ public class HelloControllerTest {
                 .andExpect(content().string(hello));
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void helloDto_리턴() throws Exception {
         String name = "hello";
