@@ -39,6 +39,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
     // 스프링-세션-데이터베이스 의존성 ( 세션저장소 jdbc )
     compile('org.springframework.session:spring-session-jdbc')
+    // MariaDB Driver
+    compile("org.mariadb.jdbc:mariadb-java-client")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.springframework.security:spring-security-test")
 }
